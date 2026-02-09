@@ -25,7 +25,7 @@ payload = {
 
 if st.sidebar.button("Run Inference"):
     try:
-        response = requests.post("http://127.0.0.1:8000/predict", json=payload)
+        response = requests.post("https://ecoroute-ml-app.onrender.com/predict", json=payload)
         if response.status_code == 200:
             result = response.json()["prediction"]
             st.balloons()
@@ -44,4 +44,5 @@ if st.checkbox("Show Live API Logs"):
             lines = f.readlines()
             st.code("".join(lines[-10:])) # Show last 10 entries
     except FileNotFoundError:
+
         st.info("No logs generated yet. Perform a prediction!")
