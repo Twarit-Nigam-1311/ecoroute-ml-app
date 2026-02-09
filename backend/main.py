@@ -20,7 +20,9 @@ app = FastAPI(title="EcoRoute Production API")
 
 # Load Model Bundle
 try:
-    bundle = joblib.load("production_model.pkl")
+    import os
+    MODEL_PATH = os.path.join(os.path.dirname(__file__), "production_model.pkl")
+    bundle = joblib.load(MODEL_PATH)
     model = bundle["model"]
     scaler = bundle["scaler"]
     logger.info("✅ ML Model and Scaler loaded successfully.")
@@ -66,4 +68,5 @@ async def predict(data: VehicleFeatures):
         }
     except Exception as e:
         logger.error(f"Prediction logic failed: {str(e)}")
+
         raise HTTPException(status_code=500, detail="Inference processing error")
