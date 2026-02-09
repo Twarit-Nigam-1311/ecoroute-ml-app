@@ -3,4 +3,5 @@ uvicorn
 joblib
 xgboost
 pydantic
+streamlit
 pandas
